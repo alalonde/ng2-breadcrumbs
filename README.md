@@ -12,3 +12,6 @@ Features:
 * Customizable labels.  Use the `BreadcrumbService` to associate custom labels with given routes.  This is useful when, say, you want to put the name of a particular entity in the breadcrumb, and that name must be looked up dynamically by the component.
 
 Feedback and PRs welcome.
+
+Acknowledgements: 
+* Thanks to [Mark Rajcok for inspiring this solution](http://stackoverflow.com/a/38808735/331791)
