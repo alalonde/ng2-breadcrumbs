@@ -1,0 +1,5 @@
+{
+  "ambientDependencies": {
+    "core-js": "github:DefinitelyTyped/DefinitelyTyped/core-js/core-js.d.ts#25e18b592470e3dddccc826fde2bb8e7610ef863"
+  }
+}
