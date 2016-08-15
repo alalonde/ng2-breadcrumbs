@@ -6,6 +6,11 @@ Currently compatible with:
  * @angular 2.0.0-rc.5
  * @angular/router 3.0.0-rc.1 
 
+## Getting started
+* `npm install`
+* `npm run example` to see a demo
+* Copy over the two breadcrumbs files into your app, and modify the template as needed.
+
 Features:
 * Outlet-based navigation.  Your navigation hierarchy may not directly match the slashes in your URL, so a breadcrumb is only constructed for each route within the router hierarchy.
 * Breadcrumb labels are encapsulated in the routing data, rather than in the components associated with them.
