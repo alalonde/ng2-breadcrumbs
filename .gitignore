@@ -3,5 +3,5 @@ node_modules
 .vscode
 .idea
 typings
-example/lib/*
+example/lib
 example/tsconfig.json

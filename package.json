@@ -9,7 +9,7 @@
   },
   "scripts": {
     "postinstall": "typings install",
-    "setup-example": "cp src/* example/lib && cp tsconfig.json example",
+    "setup-example": "mkdir example/lib && cp src/* example/lib && cp tsconfig.json example",
     "example": "npm run setup-example && lite-server -c example/bs-config.json"
   },
   "dependencies": {
