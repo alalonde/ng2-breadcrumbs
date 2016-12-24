@@ -3,8 +3,8 @@
 A breadcrumb component for Angular2.
 
 Currently compatible with:
- * @angular 2.0.0-rc.5
- * @angular/router 3.0.0-rc.1 
+ * @angular 2.3
+ * @angular/router 3.3
 
 ## Getting started
 * `npm install`
