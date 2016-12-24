@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 
-import {BreadcrumbsComponent} from '../lib/breadcrumbs.component';
-
 @Component({
   selector: 'my-app',
-  directives: [BreadcrumbsComponent],
   template: `
     <h1>School district app</h1>
     <breadcrumbs></breadcrumbs>

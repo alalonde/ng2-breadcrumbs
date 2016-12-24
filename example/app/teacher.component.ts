@@ -21,7 +21,7 @@ export class TeacherComponent {
         this.bio = `Maria Tecla Artemisia Montessori (August 31, 1870 – May 6, 1952) was an Italian physician and educator 
             best known for the philosophy of education that bears her name, and her writing on scientific pedagogy. Her 
             educational method is in use today in some public and private schools throughout the world.`;
-        this.breadcrumbLabels.addLabel(route.snapshot, this.name);
+        this.breadcrumbLabels.addLabel(route, this.name);
 
     }
 

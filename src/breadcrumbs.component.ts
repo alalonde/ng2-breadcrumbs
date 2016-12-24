@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { Component } from "@angular/core";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 
-import { BreadcrumbService } from './breadcrumbs.service';
+import { BreadcrumbService } from "./breadcrumbs.service";
 
 @Component({
-  selector: 'breadcrumbs',
-  directives: [ROUTER_DIRECTIVES],
+  selector: "breadcrumbs",
   template: `
-    <ul class="breadcrumb">
+    <ul *ngIf="segments.length > 0" class="breadcrumb">
       <li>
-        <a class="home" [routerLink]="['']">Home</a>
+        <a class="home" [routerLink]="''"><i class="material-icons" md-icon>home</i></a>
       </li>
-      <li *ngFor="let segment of segments; let last = last; let index = index;" [ngClass]="{'active': last}"> <!-- disable link of last item -->
+      <li *ngFor="let segment of segments; let last = last; let index = index;" 
+          [ngClass]="{'active': last}"> <!-- disable link of last item -->
         <a *ngIf="!last" (click)="navigateTo(segment)">{{ routeName(segment) }}</a>
         <span *ngIf="last">{{ routeName(segment, index) }}</span>
       </li>
@@ -33,38 +33,34 @@ export class BreadcrumbsComponent {
               private breadcrumbLabels: BreadcrumbService) {
     this.segments = new Array();
     this.router.events
-      .subscribe(this.routeChanged.bind(this));
+      .subscribe(event => {
+        if(event instanceof NavigationEnd) {
+          this.routeChanged(event);
+        }
+      });
   }
 
-  routeChanged(event: any) {
-    if (event instanceof NavigationEnd) {
-      this.segments.length = 0;
-      this.generateBreadcrumbTrail(this.router.routerState.root);
-    }
+  public routeChanged(event: any) {
+    this.segments.length = 0;
+    this.generateBreadcrumbTrail(this.router.routerState.root);
   }
 
-  generateBreadcrumbTrail(route: ActivatedRoute): void {
-    let childrenRoutes = this.router.routerState.children(route);
-    childrenRoutes.forEach(childRoute => {
-      if (childRoute.outlet === 'primary' && childRoute.snapshot.url.length > 0) {
-        this.segments.push(childRoute);
+  public generateBreadcrumbTrail(route: ActivatedRoute): void {
+    route.children.forEach(childRoute => {
+      if (childRoute.outlet === "primary") {
+        if (childRoute.snapshot.url.length > 0) {
+          this.segments.push(childRoute);
+        }
         this.generateBreadcrumbTrail(childRoute);
       }
     });
   }
 
-  navigateTo(route: ActivatedRoute): void {
-    let routeHierarchy = this.router.routerState.pathFromRoot(route);
-    let url = '';
-    routeHierarchy.forEach((parentRoute: ActivatedRoute) => {
-      if (parentRoute.snapshot.url.length > 0) {
-        url += '/' + parentRoute.snapshot.url.map(segment => segment.path).join('/');
-      }
-    });
-    this.router.navigateByUrl(url);
+  public navigateTo(route: ActivatedRoute): void {
+    this.router.navigateByUrl(this.breadcrumbLabels.buildUrl(route));
   }
 
-  routeName(route: ActivatedRoute): string {
-    return this.breadcrumbLabels.getLabel(route.snapshot);
+  public routeName(route: ActivatedRoute): string {
+    return this.breadcrumbLabels.getLabel(route);
   }
 }

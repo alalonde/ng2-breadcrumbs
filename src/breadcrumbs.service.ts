@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Injectable()
 export class BreadcrumbService {
@@ -9,18 +9,28 @@ export class BreadcrumbService {
     this.labels = new Map<string, string>();
   }
 
-  addLabel(route: ActivatedRouteSnapshot, label: string) {
-    // fixme I feel like there is a better way of uniquely identifying a route
-    this.labels.set(route.toString(), label);
+  public buildUrl(route: ActivatedRoute): string {
+    let url = "";
+    route.pathFromRoot.forEach((parentRoute: ActivatedRoute) => {
+      if (parentRoute.snapshot.url.length > 0) {
+        url += "/" + parentRoute.snapshot.url.map(segment => segment.path).join("/");
+      }
+    });
+    return url;
   }
 
-  getLabel(route: ActivatedRouteSnapshot): string {
-    let label = this.labels.get(route.toString());
+  public addLabel(route: ActivatedRoute, label: string) {
+    this.labels.set(this.buildUrl(route), label);
+  }
+
+  public getLabel(route: ActivatedRoute): string {
+    let label = this.labels.get(this.buildUrl(route));
     if (!label) {
-      label = route.data['title'];
+      // tslint:disable:no-string-literal
+      label = route.snapshot.data["title"];
     }
     if (!label) {
-      label = 'unknown';
+      label = "unknown";
     }
     return label;
   }

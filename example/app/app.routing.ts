@@ -1,4 +1,4 @@
-import {provideRouter, Routes, RouterModule} from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 
 import {HomeComponent} from './home.component';
 import {SchoolComponent} from './school.component';
@@ -25,9 +25,5 @@ export const appRoutes: Routes = [{
         component: TeacherComponent
     }]
 }];
-
-export const APP_ROUTER_PROVIDERS = [
-    provideRouter(appRoutes, { enableTracing: true })
-];
 
 export const routing = RouterModule.forRoot(appRoutes);
