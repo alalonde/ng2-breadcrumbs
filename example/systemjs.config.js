@@ -9,12 +9,13 @@
   //map tells the System loader where to look for things
   var map = {
     'app':                        'app',
-    '@angular':                   'https://npmcdn.com/@angular', // sufficient if we didn't pin the version
-    '@angular/router':            'https://npmcdn.com/@angular/router' + routerVer,
-    'angular2-in-memory-web-api': 'https://npmcdn.com/angular2-in-memory-web-api', // get latest
-    'rxjs':                       'https://npmcdn.com/rxjs@5.0.0-rc.4',
-    'ts':                         'https://npmcdn.com/plugin-typescript@4.0.10/lib/plugin.js',
-    'typescript':                 'https://npmcdn.com/typescript@2.1.4/lib/typescript.js',
+    '@angular':                   'https://unpkg.com/@angular', // sufficient if we didn't pin the version
+    '@angular/router':            'https://unpkg.com/@angular/router' + routerVer,
+    'angular2-in-memory-web-api': 'https://unpkg.com/angular2-in-memory-web-api', // get latest
+    'rxjs':                       'https://unpkg.com/rxjs@5.0.0-rc.4',
+    'ts':                         'https://unpkg.com/plugin-typescript@4.0.10/lib/plugin.js',
+    'typescript':                 'https://unpkg.com/typescript@2.1.4/lib/typescript.js',
+
  };
 
   //packages tells the System loader how to load when no filename and/or no extension
